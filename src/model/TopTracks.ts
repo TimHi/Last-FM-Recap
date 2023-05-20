@@ -3,11 +3,11 @@ export interface RootTracks {
 }
 
 export interface Toptracks {
-    track: Track[]
+    track: TrackModel[]
     "@attr": Attr2
 }
 
-export interface Track {
+export interface TrackModel {
     streamable: Streamable
     mbid: string
     name: string

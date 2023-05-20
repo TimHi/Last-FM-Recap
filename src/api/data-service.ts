@@ -1,7 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { FetchBaseQueryError, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { RootArtist } from '../model/TopArtist'
-import { RootAlbum } from '../model/TopAlbum'
+import { RootAlbum, Topalbums } from '../model/TopAlbum'
 import { RootTracks } from '../model/TopTracks'
+import { Tag, TopAlbumTagsModel } from '../model/AlbumTopTags'
 
 
 // Define a service using a base URL and expected endpoints
@@ -23,7 +24,15 @@ const lastfmApi = createApi({
         getTopTracksForUser: builder.query<RootTracks, string>({
             query: (userName) => `?method=user.gettoptracks&user=${userName}&api_key=${import.meta.env.VITE_LAST_FM_KEY}&period=12month&format=json`,
         }),
+        getTopTagsForAlbum: builder.query<TopAlbumTagsModel, TopTagsRequestParamets>({
+            query: (rqParameter) => `?method=album.gettoptags&artist=${rqParameter.artist}&album=${rqParameter.albumName}&api_key=${import.meta.env.VITE_LAST_FM_KEY}&format=json`,
+        })
     }),
 })
 
 export default lastfmApi
+
+interface TopTagsRequestParamets {
+    albumName: string,
+    artist: string
+}

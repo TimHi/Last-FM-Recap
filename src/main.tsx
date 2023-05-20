@@ -9,6 +9,8 @@ import LandingPage from './routes/LandingPage.tsx';
 import TopArtistPage from './routes/TopArtistPage.tsx';
 import TopAlbumsPage from './routes/TopAlbumsPage.tsx';
 import ErrorPage from './routes/ErrorPage.tsx';
+import TopTracksPage from './routes/TopTracksPage.tsx';
+import GenresPage from './routes/GenresPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,8 @@ const router = createBrowserRouter([
   },
   { path: "/artists", element: <TopArtistPage /> },
   { path: "/albums", element: <TopAlbumsPage /> },
+  { path: "/tracks", element: <TopTracksPage /> },
+  { path: "/genres", element: <GenresPage /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

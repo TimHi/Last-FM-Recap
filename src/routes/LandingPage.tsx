@@ -18,7 +18,7 @@ function LandingPage() {
     return <>
         <h1>Last.fm Recap</h1>
         <input onChange={handleUserNameInput} value={userName}></input>
-        <button onClick={() => { navigate("/artists") }}>Next!</button>
+        <button onClick={() => { navigate("/genres") }}>Next!</button>
     </>;
 }
 
