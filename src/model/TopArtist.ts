@@ -15,6 +15,7 @@ export interface ArtistModel {
     playcount: string
     "@attr": Attr
     name: string
+    realImage: string
 }
 
 export interface Image {

@@ -1,0 +1,10 @@
+.container{
+    display: flex;
+    box-orient: horizontal;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-pack: center;
+    justify-content: center;
+    box-align: center;
+    align-items: center;
+}

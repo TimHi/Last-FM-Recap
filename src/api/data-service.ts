@@ -1,11 +1,10 @@
-import { FetchBaseQueryError, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { RootArtist } from '../model/TopArtist'
-import { RootAlbum, Topalbums } from '../model/TopAlbum'
+import { RootAlbum } from '../model/TopAlbum'
 import { RootTracks } from '../model/TopTracks'
-import { Tag, TopAlbumTagsModel } from '../model/AlbumTopTags'
+import { TopAlbumTagsModel } from '../model/AlbumTopTags'
 
 
-// Define a service using a base URL and expected endpoints
 const lastfmApi = createApi({
     reducerPath: 'lastfmApi',
     baseQuery: fetchBaseQuery({
@@ -16,7 +15,8 @@ const lastfmApi = createApi({
 
     endpoints: (builder) => ({
         getTopArtistForUser: builder.query<RootArtist, string>({
-            query: (userName) => `?method=user.gettopartists&user=${userName}&api_key=${import.meta.env.VITE_LAST_FM_KEY}&period=12month&format=json`,
+            query: (userName) =>
+                `?method=user.gettopartists&user=${userName}&api_key=${import.meta.env.VITE_LAST_FM_KEY}&period=12month&format=json`,
         }),
         getTopAlbumsForUser: builder.query<RootAlbum, string>({
             query: (userName) => `?method=user.gettopalbums&user=${userName}&api_key=${import.meta.env.VITE_LAST_FM_KEY}&period=12month&format=json`,
@@ -24,15 +24,16 @@ const lastfmApi = createApi({
         getTopTracksForUser: builder.query<RootTracks, string>({
             query: (userName) => `?method=user.gettoptracks&user=${userName}&api_key=${import.meta.env.VITE_LAST_FM_KEY}&period=12month&format=json`,
         }),
-        getTopTagsForAlbum: builder.query<TopAlbumTagsModel, TopTagsRequestParamets>({
-            query: (rqParameter) => `?method=album.gettoptags&artist=${rqParameter.artist}&album=${rqParameter.albumName}&api_key=${import.meta.env.VITE_LAST_FM_KEY}&format=json`,
-        })
-    }),
-})
+        getTopTagsForAlbum: builder.query<TopAlbumTagsModel, TopTagsRequestParameters>({
+            query: (params) => `?method=album.gettoptags&artist=${params.artistName}&album=${params.albumName}&mbid=${params.mbid}&api_key=${import.meta.env.VITE_LAST_FM_KEY}&format=json`,
+        }),
+    })
+});
+
+interface TopTagsRequestParameters {
+    mbid: string,
+    albumName: string,
+    artistName: string,
+}
 
 export default lastfmApi
-
-interface TopTagsRequestParamets {
-    albumName: string,
-    artist: string
-}

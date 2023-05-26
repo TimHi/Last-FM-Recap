@@ -1,11 +1,15 @@
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit'
-import api from "../api/data-service";
+import lastfmApi from "../api/data-service";
 import listenerMiddleware from './middleware';
 import userSlice from './userSlice';
+import localBackend from '../api/local-backend';
 
 const rootReducer = combineReducers({
     user: userSlice,
-    [api.reducerPath]: api.reducer
+    [localBackend.reducerPath]: localBackend.reducer,
+    [lastfmApi.reducerPath]: lastfmApi.reducer,
+
+
 });
 
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
@@ -14,7 +18,8 @@ export function setupStore(preloadedState?: PreloadedState<RootState>) {
         middleware: (getDefaultMiddleware) => {
             return getDefaultMiddleware().prepend(
                 listenerMiddleware.middleware,
-                api.middleware
+                localBackend.middleware,
+                lastfmApi.middleware,
             );
         },
         preloadedState
