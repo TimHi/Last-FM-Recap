@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 
 import './index.css'
 import { Provider } from 'react-redux';
-import store from './store/store.ts';
+import store, { persistor } from './store/store.ts';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import LandingPage from './routes/LandingPage.tsx';
 import TopArtistPage from './routes/TopArtistPage.tsx';
@@ -11,6 +11,7 @@ import TopAlbumsPage from './routes/TopAlbumsPage.tsx';
 import ErrorPage from './routes/ErrorPage.tsx';
 import TopTracksPage from './routes/TopTracksPage.tsx';
 import GenresPage from './routes/GenresPage.tsx';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 )
