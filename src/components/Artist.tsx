@@ -9,13 +9,8 @@ interface ArtistProps {
 function Artist({ artist }: ArtistProps) {
     const { data } = localBackend.useScrapeImageQuery(encodeURIComponent(artist.url))
     if (!data) {
-        return (
-            <div>
-                <h2>{artist.name}</h2>
-                <p>{artist.playcount} scrobbles</p>
-                <p>{artist.realImage}</p>
-            </div>
-        )
+        console.log("No data");
+        return (<></>)
     } else {
         return (
             <div className={style.container}>
