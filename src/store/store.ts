@@ -5,10 +5,12 @@ import localBackend from '../api/local-backend';
 import storage from 'redux-persist/lib/storage';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from 'redux-persist';
 import listenerMiddleware from './middleware';
+import { artistSlice } from './artistSlice';
 
 
 const rootReducer = combineReducers({
     user: userSlice,
+    artist: artistSlice.reducer,
     [localBackend.reducerPath]: localBackend.reducer,
     [lastfmApi.reducerPath]: lastfmApi.reducer,
 });
