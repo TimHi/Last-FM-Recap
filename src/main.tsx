@@ -12,6 +12,7 @@ import ErrorPage from './routes/ErrorPage.tsx';
 import TopTracksPage from './routes/TopTracksPage.tsx';
 import GenresPage from './routes/GenresPage.tsx';
 import { PersistGate } from 'redux-persist/integration/react';
+import ArtistDetailPage from './routes/ArtistDetailPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -19,10 +20,13 @@ const router = createBrowserRouter([
     element: <LandingPage />,
     errorElement: <ErrorPage />
   },
-  { path: "/artists", element: <TopArtistPage /> },
-  { path: "/albums", element: <TopAlbumsPage /> },
-  { path: "/tracks", element: <TopTracksPage /> },
-  { path: "/genres", element: <GenresPage /> },
+  { path: "/artists", element: <TopArtistPage />, errorElement: <ErrorPage /> },
+  {
+    path: "/artists/:id", element: <ArtistDetailPage />, errorElement: <ErrorPage />
+  },
+  { path: "/albums", element: <TopAlbumsPage />, errorElement: <ErrorPage /> },
+  { path: "/tracks", element: <TopTracksPage />, errorElement: <ErrorPage /> },
+  { path: "/genres", element: <GenresPage />, errorElement: <ErrorPage /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

@@ -3,7 +3,7 @@ import lastfmApi from "../api/data-service";
 import userSlice from './userSlice';
 import localBackend from '../api/local-backend';
 import storage from 'redux-persist/lib/storage';
-import { persistReducer, persistStore } from 'redux-persist';
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from 'redux-persist';
 import listenerMiddleware from './middleware';
 
 
@@ -16,6 +16,8 @@ const rootReducer = combineReducers({
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist: [localBackend.reducerPath, lastfmApi.reducerPath],
+
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
@@ -24,7 +26,9 @@ export function setupStore(preloadedState?: PreloadedState<RootState>) {
     return configureStore({
         reducer: persistedReducer,
         middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-            serializableCheck: false
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
         }).prepend(
             listenerMiddleware.middleware,
             localBackend.middleware,
