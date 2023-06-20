@@ -1,0 +1,14 @@
+.image {
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+.simContainer{
+    flex-direction: column;
+}

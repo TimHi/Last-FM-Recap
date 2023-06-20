@@ -3,6 +3,7 @@ import { RootArtist } from '../model/TopArtist'
 import { RootAlbum } from '../model/TopAlbum'
 import { RootTracks } from '../model/TopTracks'
 import { TopAlbumTagsModel } from '../model/AlbumTopTags'
+import { RootSimilarartists } from '../model/SimilarArtist'
 
 
 const lastfmApi = createApi({
@@ -27,6 +28,9 @@ const lastfmApi = createApi({
         getTopTagsForAlbum: builder.query<TopAlbumTagsModel, TopTagsRequestParameters>({
             query: (params) => `?method=album.gettoptags&artist=${params.artistName}&album=${params.albumName}&mbid=${params.mbid}&api_key=${import.meta.env.VITE_LAST_FM_KEY}&format=json`,
         }),
+        getSimilarArtists: builder.query<RootSimilarartists, string>({
+            query: (artist) => `?method=artist.getsimilar&artist=${artist}&api_key=${import.meta.env.VITE_LAST_FM_KEY}&format=json`,
+        })
     })
 });
 
@@ -34,6 +38,11 @@ interface TopTagsRequestParameters {
     mbid: string,
     albumName: string,
     artistName: string,
+}
+
+interface SimilarArtistParameters {
+    artistName: string,
+    mbid: string,
 }
 
 export default lastfmApi

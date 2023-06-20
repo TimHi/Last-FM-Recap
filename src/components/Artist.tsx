@@ -14,7 +14,8 @@ function Artist({ artist }: ArtistProps) {
 
 
     function onClickHandler(): void {
-        navigate(`/artists/${artist.mbid}`);
+        console.log(artist);
+        navigate(`/artists/${artist.name}`);
     }
 
     const { data } = localBackend.useScrapeImageQuery(encodeURIComponent(artist.url))
@@ -22,8 +23,6 @@ function Artist({ artist }: ArtistProps) {
         console.log("No data");
         return (<></>)
     } else {
-
-
         return (
             <div className={style.container} onClick={onClickHandler}>
                 <img className={style.image} src={data}></img>
