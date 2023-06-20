@@ -22,7 +22,8 @@ const router = createBrowserRouter([
   },
   { path: "/artists", element: <TopArtistPage />, errorElement: <ErrorPage /> },
   {
-    path: "/artists/:id", element: <ArtistDetailPage />, errorElement: <ErrorPage />
+    path: "/artists/:id/:name",
+    element: <ArtistDetailPage />, errorElement: <ErrorPage />
   },
   { path: "/albums", element: <TopAlbumsPage />, errorElement: <ErrorPage /> },
   { path: "/tracks", element: <TopTracksPage />, errorElement: <ErrorPage /> },

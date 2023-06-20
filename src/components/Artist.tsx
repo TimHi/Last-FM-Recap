@@ -15,7 +15,7 @@ function Artist({ artist }: ArtistProps) {
 
     function onClickHandler(): void {
         console.log(artist);
-        navigate(`/artists/${artist.name}`);
+        navigate(`/artists/${artist.mbid}/${artist.name}`);
     }
 
     const { data } = localBackend.useScrapeImageQuery(encodeURIComponent(artist.url))

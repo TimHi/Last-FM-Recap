@@ -5,8 +5,8 @@ import { RootState } from './store';
 
 
 const artistAdapter = createEntityAdapter<ArtistModel>({
-    selectId: (c) => c.mbid,
-    sortComparer: (a, b) => a.mbid.localeCompare(b.mbid)
+    selectId: (c) => c.mbid + c.name,
+    sortComparer: (a, b) => (a.mbid + a.name).localeCompare(b.mbid + b.name)
 });
 
 export const artistSlice = createSlice({
